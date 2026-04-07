@@ -22,7 +22,6 @@
     "data processor",
     "consent",
     "opt-out",
-    "gdpr",
     "dpdp",
     "ccpa",
     "your rights",

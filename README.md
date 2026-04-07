@@ -49,7 +49,7 @@ The extension sends a `POST` request to the backend:
 
 ### Request
 ```json
-POST http://localhost:8000/analyze
+POST "https://ajaydhaker.pythonanywhere.com/"
 Content-Type: application/json
 
 {
@@ -67,7 +67,8 @@ Content-Type: application/json
 }
 ```
 
-> **Backend Not Running?** The extension gracefully shows a "Backend Unreachable" error, whenever the backend is not running. We have hosted backend at `https://dpdp-policy-backend.onrender.com`.
+> **Backend Not Running?** The extension gracefully shows a "Backend Unreachable" error, whenever the backend is not running. We have hosted backend at `https://ajaydhaker.pythonanywhere.com/`.
+If you face any issues can contact us at ajaydhaker2002@gmail.com
 ---
 
 ## Keyword Detection Logic
@@ -75,6 +76,6 @@ Content-Type: application/json
 The content script scores pages using:
 - **URL pattern match** → High confidence (`/privacy`, `/cookie`, `/data-policy`)
 - **Page title match** → Medium confidence
-- **Body text** → 3+ keyword hits from a list of 23 DPDP/GDPR-relevant terms
+- **Body text** → 3+ keyword hits from a list of 23 DPDP relevant terms
 
 All three signals are combined; any match triggers the "Privacy Policy Detected" banner.

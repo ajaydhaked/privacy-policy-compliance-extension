@@ -3,7 +3,7 @@
  */
 
 // ─── Constants ───────────────────────────────────────────────────────────────
-const DEFAULT_BACKEND_URL = "http://localhost:8000/analyze";
+const DEFAULT_BACKEND_URL = "https://ajaydhaker.pythonanywhere.com/";
 
 // ─── DOM Helpers ─────────────────────────────────────────────────────────────
 const $ = (id) => document.getElementById(id);
