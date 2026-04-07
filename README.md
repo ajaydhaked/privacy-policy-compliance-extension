@@ -47,11 +47,11 @@ extension/
 
 ## Backend Integration
 
-The extension sends a `POST` request to your backend:
+The extension sends a `POST` request to the backend:
 
 ### Request
 ```json
-POST http://localhost:8000/check-compliance
+POST http://localhost:8000/analyze
 Content-Type: application/json
 
 {
@@ -65,43 +65,11 @@ Content-Type: application/json
 ```json
 {
   "status": "COMPLIANT" | "NON_COMPLIANT",
-  "violations": ["Missing opt-out mechanism", "No lawful purpose specified"],
-  "reasoning": "Explanation of compliance assessment..."
+  "violations": ["Missing opt-out mechanism", "No lawful purpose specified"]
 }
 ```
 
-> **No backend yet?** The extension gracefully shows an "Backend Unreachable" error. Configure the URL via ⚙️ settings once your backend is ready.
-
----
-
-## Backend Setup (When Ready)
-
-Suggested Flask backend entry point at `backend/app.py`:
-
-```python
-from flask import Flask, request, jsonify
-from flask_cors import CORS
-
-app = Flask(__name__)
-CORS(app)
-
-@app.route("/check-compliance", methods=["POST"])
-def check_compliance():
-    data = request.json
-    content = data.get("content", "")
-    # TODO: call your LLM/rules evaluator here
-    return jsonify({
-        "status": "NON_COMPLIANT",
-        "violations": ["Example violation"],
-        "reasoning": "Placeholder response"
-    })
-
-if __name__ == "__main__":
-    app.run(port=8000)
-```
-
-Install deps: `pip install flask flask-cors`
-Run: `python backend/app.py`
+> **Backend Not Running?** The extension gracefully shows a "Backend Unreachable" error. Make sure your backend at `localhost:8000` is running. You can configure the URL via the ⚙️ settings panel.
 
 ---
 
