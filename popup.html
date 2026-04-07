@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DPDP Compliance Checker</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-icon">
+      <img src="icons/icon.svg" width="20" height="20" alt="DPDP Icon" />
+    </div>
+    <div class="header-text">
+      <h1 class="app-title">DPDP Checker</h1>
+      <span class="app-subtitle">Privacy Policy Compliance</span>
+    </div>
+    <button class="icon-btn" id="settingsToggle" title="Settings" aria-label="Toggle settings">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="3" />
+        <path
+          d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+      </svg>
+    </button>
+  </header>
+
+  <!-- Settings Panel -->
+  <section class="settings-panel hidden" id="settingsPanel">
+    <label class="settings-label" for="backendUrl">Backend API URL</label>
+    <div class="settings-row">
+      <input type="url" id="backendUrl" class="settings-input" placeholder="http://localhost:8000/analyze"
+        spellcheck="false" />
+      <button class="btn btn-save" id="saveSettings">Save</button>
+    </div>
+    <span class="settings-status" id="settingsStatus"></span>
+  </section>
+
+  <!-- Detection Banner -->
+  <section class="detection-banner" id="detectionBanner">
+    <div class="detection-dot" id="detectionDot"></div>
+    <div class="detection-info">
+      <span class="detection-label" id="detectionLabel">Analyzing page…</span>
+      <span class="detection-sub" id="detectionSub"></span>
+    </div>
+  </section>
+
+  <!-- Action -->
+  <section class="action-section">
+    <button class="btn btn-primary" id="checkBtn">
+      <svg class="btn-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+        stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 12l2 2 4-4" />
+        <circle cx="12" cy="12" r="10" />
+      </svg>
+      <span>Check Compliance</span>
+    </button>
+    <button class="btn btn-outline btn-sm" id="clearCacheBtn" title="Clear cached result and re-check">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+        stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="23 4 23 10 17 10" />
+        <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10" />
+      </svg>
+      <span>Re-check</span>
+    </button>
+  </section>
+
+  <!-- Result -->
+  <section class="result-section hidden" id="resultSection">
+    <!-- Status Row -->
+    <div class="result-status-row">
+      <div class="result-badge" id="resultBadge">
+        <span class="result-badge-icon" id="resultBadgeIcon"></span>
+        <span class="result-badge-text" id="resultBadgeText"></span>
+      </div>
+      <span class="result-cache-tag hidden" id="cacheTag">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path
+            d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
+        </svg>
+        cached
+      </span>
+    </div>
+
+    <!-- Violations -->
+    <div class="violations-block hidden" id="violationsBlock">
+      <div class="block-header">
+        <div class="block-header-left">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+            <line x1="12" y1="9" x2="12" y2="13" />
+            <line x1="12" y1="17" x2="12.01" y2="17" />
+          </svg>
+          <span>Probable violations found</span>
+        </div>
+        <span class="violations-count" id="violationsCount">0</span>
+      </div>
+      <ul class="violations-list" id="violationsList"></ul>
+    </div>
+
+    <!-- Compliant Detail -->
+    <div class="compliant-block hidden" id="compliantBlock">
+      <div class="compliant-inner">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+          <polyline points="22 4 12 14.01 9 11.01" />
+        </svg>
+        <p class="compliant-text">This privacy policy appears to be<br /><strong>compliant with the DPDP Act
+            2023</strong></p>
+      </div>
+    </div>
+
+    <!-- Reasoning -->
+    <div class="reasoning-block hidden" id="reasoningBlock">
+      <button class="reasoning-toggle" id="reasoningToggle">
+        <div class="block-header-left">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+            <polyline points="14 2 14 8 20 8" />
+            <line x1="16" y1="13" x2="8" y2="13" />
+            <line x1="16" y1="17" x2="8" y2="17" />
+          </svg>
+          <span>Reasoning</span>
+        </div>
+        <svg class="chevron-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9" />
+        </svg>
+      </button>
+      <div class="reasoning-content hidden" id="reasoningContent">
+        <p class="reasoning-text" id="reasoningText"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Loading -->
+  <section class="loading-section hidden" id="loadingSection">
+    <div class="spinner-wrap">
+      <div class="spinner"></div>
+    </div>
+    <p class="loading-text">Evaluating compliance…</p>
+    <p class="loading-sub">Analyzing against DPDP Act provisions</p>
+  </section>
+
+  <!-- Error -->
+  <section class="error-section hidden" id="errorSection">
+    <div class="error-icon-wrap">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+        stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10" />
+        <line x1="15" y1="9" x2="9" y2="15" />
+        <line x1="9" y1="9" x2="15" y2="15" />
+      </svg>
+    </div>
+    <p class="error-title" id="errorTitle">Backend Unreachable</p>
+    <p class="error-msg" id="errorMsg">Start the backend server and try again.</p>
+    <button class="btn btn-outline btn-sm error-retry-btn" id="retryBtn">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+        stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="23 4 23 10 17 10" />
+        <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10" />
+      </svg>
+      Retry
+    </button>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <span>DPDP Act 2023 · India</span>
+  </footer>
+
+  <script src="popup.js"></script>
+</body>
+
+</html>
