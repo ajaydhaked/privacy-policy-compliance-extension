@@ -38,9 +38,7 @@ extension/
 |---|---|
 | **Auto-detection** | Scans URL, page title, and body text for privacy policy keywords |
 | **Manual check** | "Check Compliance" button works on any page |
-| **Detection badge** | Purple `PP` badge on identified privacy policy tabs |
 | **Result badge** | Green `✓` (compliant) or Red `✗` (non-compliant) |
-| **Result caching** | Results cached per-tab for 5 minutes (Re-check clears it) |
 | **Configurable backend** | Set your backend URL via the ⚙️ settings panel |
 
 ---
@@ -69,8 +67,7 @@ Content-Type: application/json
 }
 ```
 
-> **Backend Not Running?** The extension gracefully shows a "Backend Unreachable" error. Make sure your backend at `localhost:8000` is running. You can configure the URL via the ⚙️ settings panel.
-
+> **Backend Not Running?** The extension gracefully shows a "Backend Unreachable" error, whenever the backend is not running. We have hosted backend at `https://dpdp-policy-backend.onrender.com`.
 ---
 
 ## Keyword Detection Logic
