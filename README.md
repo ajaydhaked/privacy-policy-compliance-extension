@@ -46,13 +46,13 @@ extension/
 ## Work Flow
 
 ### Privacy Policy Detection
-<img src="./images/ExtensionUI.png" width="450" height="300" alt="Extension UI - Privacy Policy Detected" />
+<img src="./images/ExtensionUI.png"  height="300" alt="Extension UI - Privacy Policy Detected" />
 
 ### Evaluation in Progress
-<img src="./images/EvaluationUI.png" width="450" height="300" alt="Evaluation UI - Analyzing Compliance" />
+<img src="./images/EvaluationUI.png"  height="300" alt="Evaluation UI - Analyzing Compliance" />
 
 ### Compliance Results with Violations
-<img src="./images/ViolationUI.png" width="450" height="300" alt="Violation UI - Non-Compliant Results" />
+<img src="./images/ViolationUI.png"  height="300" alt="Violation UI - Non-Compliant Results" />
 
 ---
 
