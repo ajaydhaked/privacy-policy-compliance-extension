@@ -62,7 +62,7 @@ The extension sends a `POST` request to the backend:
 
 ### Request
 ```json
-POST "https://ajaydhaker.pythonanywhere.com/"
+POST "https://ajaydhaker.pythonanywhere.com/analyze"
 Content-Type: application/json
 
 {
@@ -80,7 +80,7 @@ Content-Type: application/json
 }
 ```
 
-> **Backend Not Running?** The extension gracefully shows a "Backend Unreachable" error, whenever the backend is not running. We have hosted backend at `https://ajaydhaker.pythonanywhere.com/`.
+> **Backend Not Running?** The extension gracefully shows a "Backend Unreachable" error, whenever the backend is not running. We have hosted backend at `https://ajaydhaker.pythonanywhere.com/analyze`.
 If you face any issues can contact us at ajaydhaker2002@gmail.com
 ---
 
