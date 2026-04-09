@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Privacy policy compliance checker",
   "version": "1.0.0",
-  "description": "Detects privacy policies and evaluates whether privacy policy violates DPDP Act.",
+  "description": "Evaluates whether privacy policy complies with DPDP Act.",
   "permissions": [
     "activeTab",
     "scripting",

@@ -1,6 +1,6 @@
 # DPDP Compliance Checker — Browser Extension
 
-Chrome/Edge compatible (Manifest V3) extension that detects privacy policy pages and evaluates DPDP Act compliance.
+Extension that evaluates DPDP Act compliance.
 
 ---
 
@@ -12,8 +12,8 @@ extension/
 ├── content.js           # Privacy policy detection + page extraction
 ├── background.js        # Service worker: API calls, caching, badge
 ├── popup.html           # Extension popup layout
-├── popup.js             # Popup controller
-├── styles.css           # Dark-themed premium UI
+├── popup.js             # Popup JavaScript logic
+├── styles.css           # Popup styling
 └── icons/
     ├── icon16.png
     ├── icon48.png
@@ -22,14 +22,14 @@ extension/
 
 ---
 
-## How to Load in Chrome / Edge
+## How to Load in Browser
 
-1. Open `chrome://extensions` (or `edge://extensions`)
-2. Enable **Developer Mode** (top-right toggle)
-3. Click **Load unpacked**
-4. Select the `extension/` folder
-5. The extension icon appears in your toolbar
-
+1. Download the zip file and extract it
+2. Open `chrome://extensions` (or `edge://extensions` or extensions management page in your browser)
+3. Enable **Developer Mode** (top-right toggle)
+4. Click **Load unpacked**
+5. Select the extracted `privacy-policy-compliance-extension/` folder
+6. The extension icon appears in your toolbar
 ---
 
 ## Features
@@ -40,6 +40,22 @@ extension/
 | **Manual check** | "Check Compliance" button works on any page |
 | **Result badge** | Green `✓` (compliant) or Red `✗` (non-compliant) |
 | **Configurable backend** | Set your backend URL via the ⚙️ settings panel |
+
+---
+
+## Work Flow
+
+### Privacy Policy Detection
+![Extension UI - Privacy Policy Detected](./images/ExtensionUI.png)
+*Extension detects a privacy policy and displays confidence level with page analysis details*
+
+### Evaluation in Progress
+![Evaluation UI - Analyzing Compliance](./images/EvaluationUI.png)
+*Real-time compliance evaluation against DPDP Act provisions*
+
+### Compliance Results with Violations
+![Violation UI - Non-Compliant Results](./images/ViolationUI.png)
+*Detailed violation report showing specific DPDP Act compliance issues found in the privacy policy*
 
 ---
 
